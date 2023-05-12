@@ -1,21 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 
 public class cowShift : MonoBehaviour
 {
+
+    float idleSpeed = 2;
+
     // Update is called once per frame
-    void Update()
+    void Idle()
     {
-        this.transform.position += new Vector3(0, 1f, 0);
-        Debug.Log("more");
-        if (transform.position.y <= -3.47)
+
+		transform.position += new Vector3(0, idleSpeed, 0) * Time.deltaTime;
+		if (transform.position.y <= -3.47)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
-        }
+			idleSpeed = 2;
+		}
         else if(transform.position.y >= 3.79)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z);
-        }
+			idleSpeed = -2;
+		}
+    }
+
+    private void Update()
+    {
+        Idle();
     }
 }
