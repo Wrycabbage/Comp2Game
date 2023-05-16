@@ -34,8 +34,13 @@ public class playerController : MonoBehaviour
 	public KeyCode Up = KeyCode.Space;
 	public KeyCode Down = KeyCode.LeftControl;
 	public KeyCode Sprint = KeyCode.LeftShift;
+	public GameObject[] selfGraphicDestruction; 
 
 	private Vector3 _moveSpeed;
+
+	//Hold breath button. Player shows as static for enemy if they are breathing. 
+
+	//Anouncement stations where everyone can hear
 
 	private void Awake()
 	{
@@ -47,6 +52,13 @@ public class playerController : MonoBehaviour
 		{
 			Destroy(GetComponentInChildren<Camera>().gameObject);
 		}
+        else
+        {
+			foreach(GameObject graphic in selfGraphicDestruction)
+            {
+				Destroy(graphic);
+            }
+        }
 
 
 		_moveSpeed = Vector3.zero;
@@ -60,6 +72,12 @@ public class playerController : MonoBehaviour
 		if (!PV.IsMine)
 			return;
 
+		freeCamUpdate();
+
+	}
+
+	void freeCamUpdate()
+    {
 		if (Input.GetKey(Sprint))
 		{
 			MaximumMovementSpeed = OgMaximumMovementSpeed * 2f;
@@ -89,7 +107,6 @@ public class playerController : MonoBehaviour
 		{
 			_moveSpeed = _moveSpeed.normalized * MaximumMovementSpeed;
 		}
-
 	}
 
 	private void FixedUpdate()
