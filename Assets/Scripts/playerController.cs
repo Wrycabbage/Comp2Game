@@ -42,6 +42,8 @@ public class playerController : MonoBehaviour
 
 	//Anouncement stations where everyone can hear
 
+	//https://www.youtube.com/watch?v=qV9YaRXupK8
+
 	private void Awake()
 	{
 		PV = GetComponent<PhotonView>();
